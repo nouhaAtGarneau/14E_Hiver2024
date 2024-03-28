@@ -1,4 +1,5 @@
-﻿using CineQuebec.Windows.View;
+﻿using CineQuebec.Windows.DAL;
+using CineQuebec.Windows.View;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,7 +20,8 @@ namespace CineQuebec.Windows
     {
         public MainWindow()
         {
-            
+            DatabaseGestion db = new DatabaseGestion();
+
             InitializeComponent();
             mainContentControl.Content = new ConnexionControl();
         }
@@ -27,6 +29,12 @@ namespace CineQuebec.Windows
         public void AdminHomeControl()
         {
             mainContentControl.Content = new AdminHomeControl();
+        }
+
+
+        public void UsersControl()
+        {
+            mainContentControl.Content = new UsersControl();
         }
     }
 }

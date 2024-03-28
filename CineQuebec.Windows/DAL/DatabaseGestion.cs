@@ -8,17 +8,18 @@ using System.Threading.Tasks;
 
 namespace CineQuebec.Windows.DAL
 {
-    public class DatabasePeleMele
+    public class DatabaseGestion
     {
         private IMongoClient mongoDBClient;
         private IMongoDatabase database;
 
-        public DatabasePeleMele(IMongoClient client = null)
+        public DatabaseGestion(IMongoClient client = null)
         {
-            mongoDBClient = client ?? OuvrirConnexion();
+            mongoDBClient = client ?? OpenConnection();
             database = ConnectDatabase();
+            SeedDevelopmentData();
         }
-        private IMongoClient OuvrirConnexion()
+        private IMongoClient OpenConnection()
         {
             MongoClient dbClient = null;
             try
@@ -60,5 +61,12 @@ namespace CineQuebec.Windows.DAL
             }
             return abonnes;
         }
+
+        public void SeedDevelopmentData()
+        {
+            Seed seedData = new Seed(database);
+            seedData.SeedAbonnes();
+        }
+
     }
 }
